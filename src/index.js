@@ -1,6 +1,7 @@
 import http from 'http'
 import express from 'express'
 import bodyParser from 'body-parser'
+import Consumer from './consumer'
 
 const app = express()
 app.use((req, res, next) => {
@@ -25,6 +26,8 @@ export async function init () {
 
     httpServer.listen(PORT, () => {
       console.log(`http server is listening on ${PORT} 🗽`)
+      // setInterval(() => new Consumer().checkMessages(), 5000)
+      new Consumer().checkMessages()
     }).on('error', (err) => {
       // logger.error(err, 'Error initializing express http')
       setTimeout(() => process.exit(1), 5000)

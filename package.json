@@ -12,6 +12,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-register": "^6.26.0",
     "body-parser": "^1.18.3",
+    "cassandra-driver": "^4.3.1",
     "dotenv": "^6.2.0",
     "esm": "^3.2.11",
     "express": "^4.16.4",
@@ -19,6 +20,7 @@
     "express-healthcheck": "^0.1.0",
     "express-session": "^1.15.6",
     "http": "0.0.0",
+    "kafka-node": "^5.0.0",
     "nodemon": "^1.18.10"
   },
   "devDependencies": {
