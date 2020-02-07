@@ -3,14 +3,14 @@ import CassendraConnector from './../cassendra-connector'
 
 export default class Consumer {
 
-  constructor() {
-    this.kafka = require("kafka-node");
+  static connect() {
+    this.kafka = kafka;
 
     // let KafkaConsumer = kafka.Consumer;
-    this.client = new kafka.KafkaClient({
+    this.client = this.client || new kafka.KafkaClient({
       kafkaHost: "127.0.0.1:9092"
     });
-    
+
     this.consumer = new kafka.Consumer(this.client, [{ topic: "message", partition: 0 }], {
       groupId: '',//consumer group id, default `kafka-node-group`
       // Auto commit config
@@ -28,14 +28,11 @@ export default class Consumer {
       encoding: 'utf8',
       keyEncoding: 'utf8'
     });
-  }
 
-  checkMessages() {
     this.consumer.on("message", function(message) {
-      new CassendraConnector().insertData(message.value)
+      CassendraConnector.connect(message.value)
     }).on('error', function (err) {
       console.log(err)
     })
   }
 }
-

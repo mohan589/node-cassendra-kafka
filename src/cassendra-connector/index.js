@@ -1,8 +1,8 @@
 import cassendra from "cassandra-driver";
 
 export default class CassendraConnector {
-  constructor() {
-    this.client = new cassendra.Client({
+   static connect(message) {
+    this.client = this.client || new cassendra.Client({
       contactPoints: ["localhost:9042"],
       localDataCenter: "datacenter1"
     });
@@ -11,9 +11,11 @@ export default class CassendraConnector {
       // assert.ifError(err);
       console.log(err);
     });
+
+    CassendraConnector.insertData(message)
   }
 
-  insertData(message) {
+  static insertData(message) {
     let data = JSON.parse(message)
     const query =
       "INSERT INTO message.posts (id, title, body, created_at, updated_at) VALUES (?, ?, ?, ?, ?)";

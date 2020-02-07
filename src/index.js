@@ -27,7 +27,7 @@ export async function init () {
     httpServer.listen(PORT, () => {
       console.log(`http server is listening on ${PORT} 🗽`)
       // setInterval(() => new Consumer().checkMessages(), 5000)
-      new Consumer().checkMessages()
+      Consumer.connect()
     }).on('error', (err) => {
       // logger.error(err, 'Error initializing express http')
       setTimeout(() => process.exit(1), 5000)
